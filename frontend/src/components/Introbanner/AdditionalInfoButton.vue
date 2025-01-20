@@ -1,14 +1,16 @@
 <script lang="ts">
 import {Icon} from "@iconify/vue";
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
   name: "AdditionalInfoButton",
   components: {Icon},
-};
+  emits: ["click"],
+});
 </script>
 
 <template>
-  <button class="additional-info-button">
+  <button class="additional-info-button" @click="$emit('click')">
     Další informace
     <icon icon="mdi:keyboard-arrow-down"/>
   </button>
@@ -26,5 +28,6 @@ export default {
   color: #dddddd;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 }
 </style>

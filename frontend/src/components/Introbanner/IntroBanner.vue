@@ -15,10 +15,6 @@ export default {
       type: String,
       default: "",
     },
-    alt: {
-      type: String,
-      default: "Banner Image",
-    },
   },
 
   data() {
@@ -63,17 +59,17 @@ export default {
 
 <template>
   <div class="fullscreen-banner">
-
     <img
+        class="banner-image"
         :src="src"
-        :alt="alt"
         :style="{ transform: `scale(${imageScale})` }"
     />
 
-    <AdditionalInfoButton class="additional-info-button"/>
+    <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
+
+    <AdditionalInfoButton class="additional-info-button" @click="scrollBelowBanner"/>
 
     <div class="white-overlay" :style="{ opacity: overlayOpacity }"></div>
-
   </div>
 </template>
 
@@ -87,21 +83,20 @@ export default {
   overflow: hidden;
 }
 
-.fullscreen-banner img {
+.banner-image {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.banner-text {
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  text-align: center;
-  top: 50%;
+.chasa-logo {
+  position: absolute;
+  top: 10px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+  width: 400px;
+  max-width: 80%;
 }
 
 .additional-info-button {
@@ -117,5 +112,6 @@ export default {
   height: 100%;
   background-color: #fff;
   z-index: 0;
+  pointer-events: none;
 }
 </style>
