@@ -11,7 +11,6 @@
         <img :src="photo.src" :alt="photo.alt" />
       </div>
     </div>
-    <!-- Toggle button only appears if there's more than collapsedCount photos -->
     <button
         v-if="photos.length > collapsedCount"
         @click="$emit('toggle-grid')"
