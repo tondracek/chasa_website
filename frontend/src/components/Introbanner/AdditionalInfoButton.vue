@@ -1,19 +1,30 @@
-<script setup>
+<script lang="ts">
+import {Icon} from "@iconify/vue";
 
+export default {
+  name: "AdditionalInfoButton",
+  components: {Icon},
+};
 </script>
 
 <template>
   <button class="additional-info-button">
-    <slot></slot>
+    Další informace
+    <icon icon="mdi:keyboard-arrow-down"/>
   </button>
 </template>
 
 <style scoped>
 .additional-info-button {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  color: #dddddd;
+  justify-content: center;
+  align-items: center;
 }
 </style>

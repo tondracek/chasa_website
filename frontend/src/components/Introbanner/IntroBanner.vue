@@ -2,12 +2,14 @@
 
 import {useScroll} from '@vueuse/core'
 import {toRefs} from "vue";
+import AdditionalInfoButton from "@/components/Introbanner/AdditionalInfoButton.vue";
 
 const {y, directions} = useScroll(window)
 const scrollingDirection = toRefs(directions)
 
 export default {
   name: "FullScreenBanner",
+  components: {AdditionalInfoButton},
   props: {
     src: {
       type: String,
@@ -16,18 +18,6 @@ export default {
     alt: {
       type: String,
       default: "Banner Image",
-    },
-    showText: {
-      type: Boolean,
-      default: true,
-    },
-    title: {
-      type: String,
-      default: "",
-    },
-    subtitle: {
-      type: String,
-      default: "",
     },
   },
 
@@ -80,16 +70,9 @@ export default {
         :style="{ transform: `scale(${imageScale})` }"
     />
 
-    <div
-        class="white-overlay"
-        :style="{ opacity: overlayOpacity }"
-    >
-    </div>
+    <AdditionalInfoButton class="additional-info-button"/>
 
-    <div class="banner-text" v-if="showText">
-      <h1>{{ title }}</h1>
-      <p>{{ subtitle }}</p>
-    </div>
+    <div class="white-overlay" :style="{ opacity: overlayOpacity }"></div>
 
   </div>
 </template>
@@ -119,6 +102,13 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.additional-info-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .white-overlay {
