@@ -1,24 +1,10 @@
-<template>
-  <div class="fullscreen-banner">
+<script lang="ts">
 
-    <img :src="src" :alt="alt"/>
+import {useScroll} from '@vueuse/core'
+import {toRefs} from "vue";
 
-    <div
-        class="white-overlay"
-        :style="{ opacity: overlayOpacity }"
-    >
-    </div>
-
-    <div class="banner-text" v-if="showText">
-      <h1>{{ title }}</h1>
-      <p>{{ subtitle }}</p>
-    </div>
-
-  </div>
-</template>
-
-
-<script>
+const {y, directions} = useScroll(window)
+const scrollingDirection = toRefs(directions)
 
 export default {
   name: "FullScreenBanner",
@@ -48,6 +34,7 @@ export default {
   data() {
     return {
       overlayOpacity: 0,
+      imageScale: 1,
     };
   },
 
@@ -61,19 +48,51 @@ export default {
 
   methods: {
     handleScroll() {
-      const scrollY = window.scrollY || window.pageYOffset;
+      const bannerHeight = this.getBannerHeight()
 
-      const bannerHeight = document.querySelector(".fullscreen-banner").clientHeight;
-
-      if (scrollY === 0) {
-        window.scrollTo({top: bannerHeight, behavior: "smooth"});
+      if (y.value <= 50 && scrollingDirection.bottom.value) {
+        this.scrollBelowBanner(bannerHeight)
       }
 
       this.overlayOpacity = Math.min(scrollY / bannerHeight, 1);
+      this.imageScale = 1 + (scrollY / bannerHeight) * 0.05;
+    },
+
+    scrollBelowBanner(bannerHeight: number = this.getBannerHeight()) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo({top: bannerHeight, behavior: "smooth"});
+      document.body.style.overflow = "";
+    },
+
+    getBannerHeight() {
+      return document.querySelector(".fullscreen-banner").clientHeight;
     },
   },
 };
 </script>
+
+<template>
+  <div class="fullscreen-banner">
+
+    <img
+        :src="src"
+        :alt="alt"
+        :style="{ transform: `scale(${imageScale})` }"
+    />
+
+    <div
+        class="white-overlay"
+        :style="{ opacity: overlayOpacity }"
+    >
+    </div>
+
+    <div class="banner-text" v-if="showText">
+      <h1>{{ title }}</h1>
+      <p>{{ subtitle }}</p>
+    </div>
+
+  </div>
+</template>
 
 <style scoped>
 .fullscreen-banner {

@@ -40,7 +40,7 @@
 
 <script>
 import {onBeforeUnmount, onMounted, ref} from "vue";
-import IntroBanner from "@/components/IntroBanner.vue";
+import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
 import CalendarEvents from "@/components/CalendarEvents.vue";
 import Poster from "@/components/Poster.vue";
 import PhotoGrid from "@/components/PhotoGrid.vue";
