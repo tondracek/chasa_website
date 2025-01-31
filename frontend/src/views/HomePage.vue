@@ -7,34 +7,18 @@
     />
 
     <!-- CalendarEventsRow -->
-    <CalendarEvents :events="events"/>
+    <CalendarEventsRow :events="events"/>
 
-    <!-- LatestPoster -->
-    <LatestPoster :poster="latestPoster"/>
+    <CollapsiblePhotoGallery :photos="photos"/>
 
-    <!-- PhotoGrid -->
-    <PhotoGrid
-        :photos="photos"
-        :collapsed="photosCollapsed"
-        :collapsedCount="collapsedCount"
-        @toggle-grid="togglePhotoGrid"
-    />
-
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
+    <footer>
+      <p>...</p>
+      <p>...</p>
+      <p>...</p>
+      <p>...</p>
+      <p>...</p>
+      <p>...</p>
+    </footer>
   </div>
 </template>
 
@@ -42,16 +26,14 @@
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
 import CalendarEventsRow from "@/components/calendarevents/CalendarEventsRow.vue";
-import Poster from "@/components/Poster.vue";
-import PhotoGrid from "@/components/photogrid/PhotoGrid.vue";
+import CollapsiblePhotoGallery from "@/components/photogallery/CollapsiblePhotoGallery.vue";
 
 export default {
   name: "HomePage",
   components: {
     IntroBanner,
-    CalendarEvents: CalendarEventsRow,
-    Poster,
-    PhotoGrid,
+    CalendarEventsRow,
+    CollapsiblePhotoGallery,
   },
   setup() {
     const showBanner = ref(true);
@@ -63,18 +45,52 @@ export default {
       {name: "Hody", date: "18.-19. 10. 2025"},
     ]);
 
-    const latestPoster = ref({
-      src: "https://via.placeholder.com/600x800?text=Latest+Poster",
-      alt: "Most Recent Poster",
-    });
+    const photos = [
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+      'https://picsum.photos/800/600?random=1',
+      'https://picsum.photos/800/600?random=2',
+      'https://picsum.photos/800/600?random=3',
+    ]
 
-    const photos = ref([
-      {src: "https://via.placeholder.com/400?text=Photo+1", alt: "Photo 1"},
-      {src: "https://via.placeholder.com/400?text=Photo+2", alt: "Photo 2"},
-      {src: "https://via.placeholder.com/400?text=Photo+3", alt: "Photo 3"},
-      {src: "https://via.placeholder.com/400?text=Photo+4", alt: "Photo 4"},
-      {src: "https://via.placeholder.com/400?text=Photo+5", alt: "Photo 5"},
-    ]);
 
     const photosCollapsed = ref(true);
     const collapsedCount = ref(3);
@@ -107,10 +123,7 @@ export default {
     return {
       showBanner,
       hideBanner,
-
       events,
-      latestPoster,
-
       photos,
       photosCollapsed,
       collapsedCount,
