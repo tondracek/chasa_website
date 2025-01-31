@@ -6,7 +6,7 @@
         title="MOHELENSKÁ CHASA"
     />
 
-    <!-- CalendarEvents -->
+    <!-- CalendarEventsRow -->
     <CalendarEvents :events="events"/>
 
     <!-- LatestPoster -->
@@ -41,7 +41,7 @@
 <script lang="ts">
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
-import CalendarEvents from "@/components/CalendarEvents.vue";
+import CalendarEventsRow from "@/components/calendarevents/CalendarEventsRow.vue";
 import Poster from "@/components/Poster.vue";
 import PhotoGrid from "@/components/photogrid/PhotoGrid.vue";
 
@@ -49,7 +49,7 @@ export default {
   name: "HomePage",
   components: {
     IntroBanner,
-    CalendarEvents,
+    CalendarEvents: CalendarEventsRow,
     Poster,
     PhotoGrid,
   },
@@ -58,10 +58,9 @@ export default {
 
     // Example data
     const events = ref([
-      {name: "Annual Meetup", date: "2025-02-15"},
-      {name: "Charity Fundraiser", date: "2025-03-10"},
-      {name: "Summer Picnic", date: "2025-06-22"},
-      {name: "End-of-Year Celebration", date: "2025-12-05"},
+      {name: "Dětský den", date: "31. 5. 2025"},
+      {name: "Pouť", date: "9. 8. 2025"},
+      {name: "Hody", date: "18.-19. 10. 2025"},
     ]);
 
     const latestPoster = ref({
