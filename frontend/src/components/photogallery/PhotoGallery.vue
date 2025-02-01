@@ -7,21 +7,21 @@
       @hide="onHide"
   />
 
-  <!-- Thumbnails or preview images -->
-  <img
-      v-for="(img, index) in photos"
-      :key="index"
-      :src="img"
-      alt=""
-      @click="openLightbox(index)"
-  />
+<!--  <div class="photo-grid">-->
+    <img
+        v-for="(img, index) in photos"
+        :key="index"
+        :src="img"
+        alt=""
+        @click="openLightbox(index)"
+    />
+<!--  </div>-->
 </template>
 
 <script setup>
 import {defineProps, ref} from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
-// 1) Define a prop for the images array
 const props = defineProps({
   photos: {
     type: Array,
@@ -44,7 +44,11 @@ function onHide() {
 </script>
 
 <style scoped>
-/* Just minimal styling, feel free to adjust */
+
+.photo-grid {
+  display: grid;
+}
+
 img {
   width: 150px;
   margin: 10px;

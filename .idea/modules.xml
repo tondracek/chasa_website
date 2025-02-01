@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chasa_website.iml" filepath="$PROJECT_DIR$/.idea/modules/chasa_website.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chasa_website.chasa_website-build.iml" filepath="$PROJECT_DIR$/.idea/modules/chasa_website.chasa_website-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chasa_website.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chasa_website.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chasa_website.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chasa_website.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/frontend/frontend.iml" filepath="$PROJECT_DIR$/frontend/frontend.iml" />
