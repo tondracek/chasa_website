@@ -9,9 +9,15 @@
     <!-- CalendarEventsRow -->
     <CalendarEventsRow :events="events"/>
 
-    <CollapsiblePhotoGallery
-        class="photo-gallery"
-        :photos="photos"/>
+    <div class="horizontal-center">
+      <div class="divider"/>
+    </div>
+
+    <div class="photo-gallery-wrapper">
+      <CollapsiblePhotoGallery
+          class="photo-gallery"
+          :photos="photos"/>
+    </div>
 
     <footer>
       <p>...</p>
@@ -603,5 +609,25 @@ export default {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #fff2d8;
+}
+
+.divider {
+  width: 80%;
+  height: 2px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #a8a8a8;
+}
+
+.horizontal-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-gallery {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>

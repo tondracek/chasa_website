@@ -19,7 +19,7 @@ export default {
 
   data() {
     return {
-      overlayOpacity: 0,
+      bannerOpacity: 1,
       imageScale: 1,
     };
   },
@@ -40,8 +40,8 @@ export default {
         this.scrollBelowBanner(bannerHeight)
       }
 
-      this.overlayOpacity = Math.min(scrollY / bannerHeight, 1);
-      this.imageScale = 1 + (scrollY / bannerHeight) * 0.05;
+      this.bannerOpacity = 1 - Math.min(scrollY / bannerHeight, 1);
+      this.imageScale = 1 + (scrollY / bannerHeight) * 0.1;
     },
 
     scrollBelowBanner(bannerHeight: number = this.getBannerHeight()) {
@@ -62,14 +62,15 @@ export default {
     <img
         class="banner-image"
         :src="src"
-        :style="{ transform: `scale(${imageScale})` }"
+        :style="{
+          transform: `scale(${imageScale})`,
+          opacity: bannerOpacity,
+        }"
     />
 
     <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
 
     <AdditionalInfoButton class="additional-info-button" @click="scrollBelowBanner"/>
-
-    <div class="white-overlay" :style="{ opacity: overlayOpacity }"></div>
   </div>
 </template>
 
@@ -104,14 +105,5 @@ export default {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.white-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  z-index: 0;
-  pointer-events: none;
 }
 </style>
