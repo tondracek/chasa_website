@@ -41,10 +41,6 @@ function scrollBelowBanner(bannerHeight: number = getBannerHeight()) {
 function getBannerHeight() {
   return document.querySelector(".fullscreen-banner").clientHeight;
 }
-
-function logImageUrl() {
-  console.log(imageUrl.value);
-}
 </script>
 
 <template>
@@ -56,7 +52,6 @@ function logImageUrl() {
           transform: `scale(${imageScale})`,
           opacity: bannerOpacity,
         }"
-        @click="logImageUrl"
     />
 
     <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
