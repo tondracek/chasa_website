@@ -1,12 +1,7 @@
 <template>
   <div class="home-page">
-    <!-- BannerIntro -->
-    <IntroBanner
-        src="/banner_photo.jpg"
-        title="MOHELENSKÁ CHASA"
-    />
+    <IntroBanner/>
 
-    <!-- CalendarEventsRow -->
     <CalendarEventsRow :events="events"/>
 
     <div class="horizontal-center">
@@ -576,7 +571,6 @@ export default {
       'https://picsum.photos/800/600?random=9',
     ]
 
-
     const photosCollapsed = ref(true);
 
     // Hide banner on scroll
@@ -586,7 +580,7 @@ export default {
       }
     };
 
-    onMounted(() => {
+    onMounted(async () => {
       window.addEventListener("scroll", handleScroll, {passive: true});
     });
 
