@@ -7,15 +7,14 @@
       @hide="onHide"
   />
 
-<!--  <div class="photo-grid">-->
-    <img
-        v-for="(img, index) in photos"
-        :key="index"
-        :src="img"
-        alt=""
-        @click="openLightbox(index)"
-    />
-<!--  </div>-->
+  <img
+      v-for="(img, index) in photos"
+      :key="index"
+      :src="img"
+      alt=""
+      loading="lazy"
+      @click="openLightbox(index)"
+  />
 </template>
 
 <script setup>
@@ -44,10 +43,6 @@ function onHide() {
 </script>
 
 <style scoped>
-
-.photo-grid {
-  display: grid;
-}
 
 img {
   width: 150px;
