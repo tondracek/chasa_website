@@ -35,7 +35,7 @@ defineProps({
 }
 
 h2 {
-  color: #333;
+  color: #373127;
   font-size: 2rem;
   margin-bottom: 1rem;
   font-weight: bold;

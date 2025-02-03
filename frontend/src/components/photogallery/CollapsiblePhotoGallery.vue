@@ -2,7 +2,6 @@
 import {computed, defineProps, onBeforeUnmount, onMounted, ref, useTemplateRef} from 'vue'
 import PhotoGallery from '@/components/photogallery/PhotoGallery.vue'
 import ShowMorePhotosButton from "@/components/photogallery/ShowMorePhotosButton.vue";
-import {vAutoAnimate} from "@formkit/auto-animate";
 
 const props = defineProps({
   photos: {
@@ -43,6 +42,11 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', checkGalleryVisibility)
   window.removeEventListener('resize', checkGalleryVisibility)
 })
+
+function onShowMorePhotosButtonClicked() {
+  isCollapsed.value = !isCollapsed.value
+  checkGalleryVisibility()
+}
 </script>
 
 <template>
@@ -52,14 +56,16 @@ onBeforeUnmount(() => {
     </div>
 
     <ShowMorePhotosButton
+        :isCollapsed="isCollapsed"
         class="show-more-photos-button"
-        @click="isCollapsed = !isCollapsed"
+        @click="onShowMorePhotosButtonClicked"
     />
 
     <transition name="slide-up">
       <ShowMorePhotosButton
+          :isCollapsed="isCollapsed"
           class="floating-show-more-photos-button"
-          @click="isCollapsed = !isCollapsed"
+          @click="onShowMorePhotosButtonClicked"
           v-if="galleryVisible"
       />
     </transition>
@@ -105,5 +111,14 @@ onBeforeUnmount(() => {
 .slide-up-leave-from {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+.floating-show-more-photos-button:hover {
+  background-color: #0056b3;
+  transform: translate(-50%, 0) scale(1.05);
+}
+
+.floating-show-more-photos-button:active {
+  transform: translate(-50%, 0) scale(0.95);
 }
 </style>
