@@ -1,21 +1,22 @@
 <script setup>
+import * as strings from "@/paraglide/messages"
 
 defineProps({
   isCollapsed: Boolean,
 })
 defineEmits([
-  'click'
+  'click',
 ])
 </script>
 
 <template>
-  <button class="sticky-button" @click="$emit('click')">
-    {{ isCollapsed ? 'Show More' : 'Show Less' }}
+  <button class="show-more-button" @click="$emit('click')">
+    {{ isCollapsed ? strings.show_all() : strings.hide_gallery() }}
   </button>
 </template>
 
 <style scoped>
-.sticky-button {
+.show-more-button {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -25,12 +26,12 @@ defineEmits([
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.sticky-button:hover {
+.show-more-button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-.sticky-button:active {
+.show-more-button:active {
   transform: scale(0.95);
 }
 </style>

@@ -2,6 +2,10 @@
   <div class="home-page">
     <IntroBanner/>
 
+    <div class="horizontal-center">
+      <div class="divider"/>
+    </div>
+
     <CalendarEventsRow :events="events"/>
 
     <div class="horizontal-center">
