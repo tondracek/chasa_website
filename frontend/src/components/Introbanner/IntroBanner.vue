@@ -92,4 +92,10 @@ function getBannerHeight() {
   left: 50%;
   transform: translateX(-50%);
 }
+
+@media (max-width: 600px) {
+  .additional-info-button {
+    bottom: 70px;
+  }
+}
 </style>
