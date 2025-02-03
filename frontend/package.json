@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide && vite build",
     "preview": "vite preview",
-    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide"
+    "postinstall": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@iconify/vue": "^4.3.0",
@@ -23,6 +24,7 @@
     "vue-lazyload": "^3.0.0"
   },
   "devDependencies": {
-    "@inlang/paraglide-js": "1.11.8"
+    "@inlang/paraglide-js": "1.11.8",
+    "gh-pages": "^6.3.0"
   }
 }
