@@ -7,7 +7,6 @@ class MyRepository {
 
     public async getGalleryImagesUrls(): Promise<string[]> {
         const url = `${this.API_URL}?q='${this.FOLDER_ID}'+in+parents+and+(mimeType contains 'image/')&key=${this.verySecureVeryMindful}`;
-        console.log("Request URL:", url);
 
         try {
             const response = await fetch(url);
@@ -19,6 +18,7 @@ class MyRepository {
 
             const data = await response.json();
 
+            console.log("-- fetched files:", data.files);
             return data.files?.map((file: { id: string, webContentLink?: string }) =>
                 `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${this.verySecureVeryMindful}`
             ) || [];

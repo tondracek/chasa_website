@@ -4,7 +4,9 @@ import AdditionalInfoButton from "@/components/Introbanner/AdditionalInfoButton.
 
 const bannerOpacity = ref(1);
 const imageScale = ref(1);
-const imageUrl = ref("/banner_photo.jpg");
+
+const imageUrl = ref("banner_photo.jpg");
+const logoUrl = ref("logo_chasa.svg")
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
@@ -42,7 +44,7 @@ function getBannerHeight() {
     />
 
     <div class="banner-overlay">
-      <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
+      <img :src="logoUrl" alt="Chasa Logo" class="chasa-logo"/>
       <AdditionalInfoButton class="additional-info-button" @click="scrollBelowBanner"/>
     </div>
   </div>
@@ -82,7 +84,6 @@ function getBannerHeight() {
 }
 
 .additional-info-button {
-  margin-bottom: 20px;
   color: #dddddd;
 }
 
@@ -96,6 +97,7 @@ function getBannerHeight() {
   }
 
   .additional-info-button {
+    margin-bottom: 20px;
     color: #2c2c2c;
   }
 }
