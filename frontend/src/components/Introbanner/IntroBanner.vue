@@ -2,19 +2,16 @@
 import AdditionalInfoButton from "@/components/Introbanner/AdditionalInfoButton.vue";
 import {useScroll} from '@vueuse/core'
 import {onBeforeUnmount, onMounted, ref, toRefs} from "vue";
-import {getBannerImageUrl} from "@/usecase/getBannerImageUrl";
 
 const {y, directions} = useScroll(window)
 const scrollingDirection = toRefs(directions)
 
 const bannerOpacity = ref(1)
 const imageScale = ref(1)
-const imageUrl = ref(null)
+const imageUrl = ref("/banner_photo.jpg")
 
 onMounted(async () => {
   window.addEventListener("scroll", handleScroll);
-
-  imageUrl.value = await getBannerImageUrl()
 })
 
 onBeforeUnmount(() => {
