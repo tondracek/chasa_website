@@ -25,7 +25,6 @@ export default defineComponent({
   flex-direction: column;
   font-weight: bold;
   font-family: 'Arial', sans-serif;
-  color: #dddddd;
   justify-content: center;
   align-items: center;
   font-size: 20px;

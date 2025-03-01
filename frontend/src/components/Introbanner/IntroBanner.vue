@@ -1,32 +1,23 @@
 <script setup lang="ts">
+import {onBeforeUnmount, onMounted, ref} from "vue";
 import AdditionalInfoButton from "@/components/Introbanner/AdditionalInfoButton.vue";
-import {useScroll} from '@vueuse/core'
-import {onBeforeUnmount, onMounted, ref, toRefs} from "vue";
 
-const {y, directions} = useScroll(window)
-const scrollingDirection = toRefs(directions)
+const bannerOpacity = ref(1);
+const imageScale = ref(1);
+const imageUrl = ref("/banner_photo.jpg");
 
-const bannerOpacity = ref(1)
-const imageScale = ref(1)
-const imageUrl = ref("/banner_photo.jpg")
-
-onMounted(async () => {
+onMounted(() => {
   window.addEventListener("scroll", handleScroll);
-})
+});
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
-})
+});
 
 function handleScroll() {
-  const bannerHeight = getBannerHeight()
-
-  if (y.value <= 50 && scrollingDirection.bottom.value) {
-    scrollBelowBanner(bannerHeight)
-  }
-
-  bannerOpacity.value = 1 - Math.min(scrollY / bannerHeight, 1);
-  imageScale.value = 1 + (scrollY / bannerHeight) * 0.1;
+  const bannerHeight = getBannerHeight();
+  bannerOpacity.value = 1 - Math.min(window.scrollY / bannerHeight, 1);
+  imageScale.value = 1 + (window.scrollY / bannerHeight) * 0.1;
 }
 
 function scrollBelowBanner(bannerHeight: number = getBannerHeight()) {
@@ -36,7 +27,8 @@ function scrollBelowBanner(bannerHeight: number = getBannerHeight()) {
 }
 
 function getBannerHeight() {
-  return document.querySelector(".fullscreen-banner").clientHeight;
+  const banner = document.querySelector(".fullscreen-banner");
+  return banner ? banner.clientHeight : 0;
 }
 </script>
 
@@ -45,15 +37,14 @@ function getBannerHeight() {
     <img
         class="banner-image"
         :src="imageUrl"
-        :style="{
-          transform: `scale(${imageScale})`,
-          opacity: bannerOpacity,
-        }"
+        :style="{ transform: `scale(${imageScale})`, opacity: bannerOpacity }"
+        alt="banner-image"
     />
 
-    <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
-
-    <AdditionalInfoButton class="additional-info-button" @click="scrollBelowBanner"/>
+    <div class="banner-overlay">
+      <img src="/logo_chasa.svg" alt="Chasa Logo" class="chasa-logo"/>
+      <AdditionalInfoButton class="additional-info-button" @click="scrollBelowBanner"/>
+    </div>
   </div>
 </template>
 
@@ -61,8 +52,6 @@ function getBannerHeight() {
 .fullscreen-banner {
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
   position: relative;
   overflow: hidden;
 }
@@ -74,25 +63,40 @@ function getBannerHeight() {
   object-fit: cover;
 }
 
-.chasa-logo {
+.banner-overlay {
   position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chasa-logo {
+  margin-top: 10px;
   width: 400px;
   max-width: 80%;
 }
 
 .additional-info-button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-bottom: 20px;
+  color: #dddddd;
 }
 
 @media (max-width: 600px) {
+  .banner-image {
+    object-fit: scale-down;
+    background: linear-gradient(
+        white 50%,
+        transparent
+    );
+  }
+
   .additional-info-button {
-    bottom: 70px;
+    color: #2c2c2c;
   }
 }
 </style>
