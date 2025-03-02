@@ -49,7 +49,7 @@ function onHide() {
 <style scoped>
 
 img {
-  width: 150px;
+  height: 150px;
   margin: 10px;
   cursor: pointer;
 }

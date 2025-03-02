@@ -14,7 +14,7 @@ const props = defineProps({
   },
   collapsedCount: {
     type: Number,
-    default: 6
+    default: 5
   }
 })
 
