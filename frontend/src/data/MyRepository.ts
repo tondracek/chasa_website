@@ -1,35 +1,31 @@
 class MyRepository {
-
-    private verySecureVeryMindful = "AIzaSyAHDRJa00z_zpt6kHmtZ-IM6qW1oDpxlQY";
-
-    private readonly FOLDER_ID = "1aJE-3Nm9IAXon6Bp-i4z8zubvXfQy4QK";
-    private readonly API_URL = "https://www.googleapis.com/drive/v3/files";
-
     public async getGalleryImagesUrls(): Promise<string[]> {
-        const url = `${this.API_URL}?q='${this.FOLDER_ID}'+in+parents+and+(mimeType contains 'image/')&key=${this.verySecureVeryMindful}`;
-
         try {
-            const response = await fetch(url);
+            const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
             console.log("Response:", response);
-
-            if (!response.ok) {
-                return [];
-            }
 
             const data = await response.json();
 
-            console.log("-- fetched files:", data.files);
-            return data.files?.map((file: { id: string, webContentLink?: string }) =>
-                `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${this.verySecureVeryMindful}`
-            ) || [];
+            const imageUrls: string[] = data.resources.map((resource: any) => {
+                return `https://res.cloudinary.com/des4ugdwx/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`;
+            });
+
+            console.log("Fetched image URLs:", imageUrls);
+            return imageUrls;
         } catch (error) {
-            console.error("Error fetching images:", error);
+            console.error("Error fetching image URLs:", error);
             return [];
         }
     }
 
     public async getEvents(): Promise<EventData[]> {
-        return [];
+        return new Promise((resolve) => {
+            resolve([
+                { name: "Dětský den", date: "31. 5. 2025" },
+                { name: "Pouť", date: "9. 8. 2025" },
+                { name: "Hody", date: "18.-19. 10. 2025" },
+            ]);
+        });
     }
 }
 

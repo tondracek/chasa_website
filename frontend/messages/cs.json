@@ -1,5 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "gallery": "Galerie",
   "show_all": "Zobrazit vše",
   "hide_gallery": "Skrýt galerii",
   "upcoming_events": "Na co se můžete těšit"

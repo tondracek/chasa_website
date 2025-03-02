@@ -12,7 +12,6 @@
       :key="index"
       :src="img"
       alt=""
-      loading="lazy"
       @click="openLightbox(index)"
   />
 </template>

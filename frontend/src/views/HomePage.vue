@@ -6,16 +6,22 @@
       <div class="divider"/>
     </div>
 
-    <CalendarEventsRow :events="events"/>
+    <div class="highlighted-row">
+      <h2>{{ strings.upcoming_events() }}</h2>
+      <CalendarEventsRow/>
+    </div>
 
     <div class="horizontal-center">
       <div class="divider"/>
     </div>
 
-    <div class="photo-gallery-wrapper">
-      <CollapsiblePhotoGallery
-          class="photo-gallery"
-          :photos="photos"/>
+    <div class="highlighted-row">
+      <h2>{{ strings.gallery() }}</h2>
+      <div class="photo-gallery-wrapper">
+        <CollapsiblePhotoGallery
+            class="photo-gallery"
+            :photos="photos"/>
+      </div>
     </div>
 
     <footer>
@@ -47,64 +53,38 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
 import CalendarEventsRow from "@/components/calendarevents/CalendarEventsRow.vue";
 import CollapsiblePhotoGallery from "@/components/photogallery/CollapsiblePhotoGallery.vue";
-import ShowMorePhotosButton from "@/components/photogallery/ShowMorePhotosButton.vue";
 import MyRepository from "@/data/MyRepository";
+import * as strings from "@/paraglide/messages.js";
 
-export default {
-  name: "HomePage",
-  components: {
-    ShowMorePhotosButton,
-    IntroBanner,
-    CalendarEventsRow,
-    CollapsiblePhotoGallery,
-  },
-  setup() {
-    const showBanner = ref(true);
+const showBanner = ref(true);
 
-    // Example data
-    const events = ref([
-      {name: "Dětský den", date: "31. 5. 2025"},
-      {name: "Pouť", date: "9. 8. 2025"},
-      {name: "Hody", date: "18.-19. 10. 2025"},
-    ]);
+const photos = ref<string[]>([]);
 
-    const photos = ref<string[]>([]);
-
-    const photosCollapsed = ref(true);
-
-    // Hide banner on scroll
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        showBanner.value = false;
-      }
-    };
-
-    onMounted(async () => {
-      window.addEventListener("scroll", handleScroll, {passive: true});
-
-      photos.value = await MyRepository.getGalleryImagesUrls();
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener("scroll", handleScroll);
-    });
-
-    return {
-      showBanner,
-      events,
-      photos,
-      photosCollapsed,
-    };
-  },
+const handleScroll = () => {
+  if (window.scrollY > 50) {
+    showBanner.value = false;
+  }
 };
+
+onMounted(async () => {
+  window.addEventListener("scroll", handleScroll, {passive: true});
+
+  photos.value = await MyRepository.getGalleryImagesUrls();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
 </script>
 
 <style scoped>
+
 .home-page {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -115,8 +95,8 @@ export default {
 .divider {
   width: 80%;
   height: 2px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   background-color: #a8a8a8;
 }
 
@@ -130,4 +110,20 @@ export default {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.highlighted-row {
+  background: #f8e6c0;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  color: #373127;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
 </style>

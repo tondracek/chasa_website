@@ -1,7 +1,7 @@
 class EventData {
     constructor(
         public name: string,
-        public date: Date,
+        public date: string,
     ) {
     }
 }

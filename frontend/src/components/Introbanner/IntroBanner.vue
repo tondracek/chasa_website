@@ -19,7 +19,7 @@ onBeforeUnmount(() => {
 function handleScroll() {
   const bannerHeight = getBannerHeight();
   bannerOpacity.value = 1 - Math.min(window.scrollY / bannerHeight, 1);
-  imageScale.value = 1 + (window.scrollY / bannerHeight) * 0.1;
+  imageScale.value = 1 + (window.scrollY / bannerHeight) * 0.05;
 }
 
 function scrollBelowBanner(bannerHeight: number = getBannerHeight()) {
@@ -92,7 +92,7 @@ function getBannerHeight() {
     object-fit: scale-down;
     background: linear-gradient(
         white 50%,
-        transparent
+        transparent 80%
     );
   }
 

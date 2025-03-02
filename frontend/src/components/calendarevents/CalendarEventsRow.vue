@@ -1,10 +1,8 @@
 <template>
   <section class="calendar">
-    <h2>{{ strings.upcoming_events() }}</h2>
     <div class="events-container">
       <CalendarEvent
           v-for="event in events"
-          :key="event.name"
           :name="event.name"
           :date="event.date"
       />
@@ -15,31 +13,19 @@
 <script setup lang="ts">
 
 import CalendarEvent from "@/components/calendarevents/CalendarEvent.vue";
-import * as strings from "@/paraglide/messages"
+import {onMounted, ref} from "vue";
+import MyRepository from "@/data/MyRepository";
 
-defineProps({
-  events: {
-    type: Array,
-    default: () => [],
-  },
+const events = ref<EventData[]>([]);
+
+onMounted(async () => {
+  events.value = await MyRepository.getEvents();
+  console.log(await MyRepository.getEvents())
 })
+
 </script>
 
 <style scoped>
-.calendar {
-  background: #f8e6c0;
-  padding: 2rem;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #373127;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
 
 .events-container {
   display: flex;
