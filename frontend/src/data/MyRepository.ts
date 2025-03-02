@@ -26,7 +26,7 @@ class MyRepository {
             const data = await response.json();
 
             const imageUrls: string[] = data.resources.map((resource: any) => {
-                return `https://res.cloudinary.com/des4ugdwx/image/upload/w_200/v${resource.version}/${resource.public_id}.${resource.format}`;
+                return `https://res.cloudinary.com/des4ugdwx/image/upload/w_300/v${resource.version}/${resource.public_id}.${resource.format}`;
             });
 
             console.log("Fetched image URLs:", imageUrls);
