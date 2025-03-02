@@ -4,6 +4,10 @@ import PhotoGallery from '@/components/photogallery/PhotoGallery.vue'
 import ShowMorePhotosButton from "@/components/photogallery/ShowMorePhotosButton.vue";
 
 const props = defineProps({
+  thumbnailPhotos: {
+    type: Array,
+    default: () => []
+  },
   photos: {
     type: Array,
     default: () => []
@@ -18,8 +22,8 @@ const isCollapsed = ref(true)
 
 const visiblePhotos = computed(() => {
   return isCollapsed.value
-      ? props.photos.slice(0, props.collapsedCount)
-      : props.photos
+      ? props.thumbnailPhotos.slice(0, props.collapsedCount)
+      : props.thumbnailPhotos
 })
 
 const galleryVisible = ref(false)
@@ -52,7 +56,7 @@ function onShowMorePhotosButtonClicked() {
 <template>
   <div class="container">
     <div class="photo-gallery-wrapper" ref="galleryContainer">
-      <PhotoGallery :photos="visiblePhotos"/>
+      <PhotoGallery :thumbnailPhotos="visiblePhotos" :photos="photos"/>
     </div>
 
     <ShowMorePhotosButton

@@ -20,6 +20,7 @@
       <div class="photo-gallery-wrapper">
         <CollapsiblePhotoGallery
             class="photo-gallery"
+            :thumbnail-photos="thumbnailPhotos"
             :photos="photos"/>
       </div>
     </div>
@@ -64,6 +65,7 @@ import * as strings from "@/paraglide/messages.js";
 const showBanner = ref(true);
 
 const photos = ref<string[]>([]);
+const thumbnailPhotos = ref<string[]>([]);
 
 const handleScroll = () => {
   if (window.scrollY > 50) {
@@ -75,6 +77,7 @@ onMounted(async () => {
   window.addEventListener("scroll", handleScroll, {passive: true});
 
   photos.value = await MyRepository.getGalleryImagesUrls();
+  thumbnailPhotos.value = await MyRepository.getGalleryThumbnailImagesUrls();
 });
 
 onBeforeUnmount(() => {

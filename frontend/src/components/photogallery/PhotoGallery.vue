@@ -8,10 +8,11 @@
   />
 
   <img
-      v-for="(img, index) in photos"
+      v-for="(img, index) in thumbnailPhotos"
       :key="index"
       :src="img"
       alt=""
+      loading="lazy"
       @click="openLightbox(index)"
   />
 </template>
@@ -21,10 +22,14 @@ import {defineProps, ref} from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
 const props = defineProps({
+  thumbnailPhotos: {
+    type: Array,
+    default: () => []
+  },
   photos: {
     type: Array,
     default: () => []
-  }
+  },
 })
 
 const visible = ref(false)

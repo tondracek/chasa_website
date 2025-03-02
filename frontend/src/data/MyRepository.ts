@@ -18,6 +18,25 @@ class MyRepository {
         }
     }
 
+    public async getGalleryThumbnailImagesUrls(): Promise<string[]> {
+        try {
+            const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
+            console.log("Response:", response);
+
+            const data = await response.json();
+
+            const imageUrls: string[] = data.resources.map((resource: any) => {
+                return `https://res.cloudinary.com/des4ugdwx/image/upload/w_200/v${resource.version}/${resource.public_id}.${resource.format}`;
+            });
+
+            console.log("Fetched image URLs:", imageUrls);
+            return imageUrls;
+        } catch (error) {
+            console.error("Error fetching image URLs:", error);
+            return [];
+        }
+    }
+
     public async getEvents(): Promise<EventData[]> {
         return new Promise((resolve) => {
             resolve([
