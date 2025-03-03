@@ -32,14 +32,15 @@
     <div class="highlighted-row">
       <footer>
         <a href="https://www.instagram.com/mohelenska_chasa/" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-instagram social-icon"></i>
+          <img src="/brand-instagram.png" alt="Instagram" class="social-icon" />
           <span>Instagram</span>
         </a>
         <a href="https://www.facebook.com/MohelenskaChasa" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-facebook social-icon"></i>
+          <img src="/brand-facebook.png" alt="Facebook" class="social-icon" />
           <span>Facebook</span>
         </a>
       </footer>
+      <p class="author">Vývoj webu: Tomáš Ondráček</p>
     </div>
   </div>
 </template>
@@ -113,6 +114,8 @@ footer {
   justify-content: space-around;
   align-items: center;
   padding: 1rem 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* Styling for each link inside the footer */
@@ -126,12 +129,18 @@ footer a {
   transition: color 0.3s ease;
 }
 
+.author {
+  color: #9e9e9e;
+}
+
 footer a:hover {
-  color: #555;
+  color: #b3b3b3;
 }
 
 /* Icon styling */
 .social-icon {
-  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 </style>
