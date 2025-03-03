@@ -81,7 +81,6 @@ function getFirstNumberInString(str: string): number {
     const match = str.match(/\d+/);
     if (match) {
         const numberPart = match[0];
-        console.log("Number part:", numberPart);
-        return parseInt(numberPart) || 1000000;
+        return parseInt(numberPart);
     }
 }
