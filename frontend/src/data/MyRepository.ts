@@ -2,17 +2,15 @@ import yaml from 'js-yaml';
 
 class MyRepository {
 
+    /** GALLERY **/
+
     public async getGalleryImagesUrls(): Promise<string[]> {
         try {
-            const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
-            console.log("[Gallery full-quality images loading] response:", response);
+            const sortedData = await this.getGalleryImages();
 
-            const data = await response.json();
-            console.log("[Gallery full-quality images loading] data:", data);
-
-            return data.resources.map((resource: any) => {
-                return `https://res.cloudinary.com/des4ugdwx/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`;
-            });
+            return sortedData.map((resource: any) =>
+                `https://res.cloudinary.com/des4ugdwx/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`
+            );
         } catch (error) {
             console.error("[Gallery full-quality images loading] Error:", error);
             return [];
@@ -21,20 +19,33 @@ class MyRepository {
 
     public async getGalleryThumbnailImagesUrls(): Promise<string[]> {
         try {
-            const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
-            console.log("[Gallery Thumbnail images loading] response:", response)
+            const sortedData = await this.getGalleryImages();
 
-            const data = await response.json();
-            console.log("[Gallery Thumbnail images loading] data:", data);
-
-            return data.resources.map((resource: any) => {
-                return `https://res.cloudinary.com/des4ugdwx/image/upload/w_300/v${resource.version}/${resource.public_id}.${resource.format}`;
-            });
+            return sortedData.map((resource: any) =>
+                `https://res.cloudinary.com/des4ugdwx/image/upload/w_300/v${resource.version}/${resource.public_id}.${resource.format}`
+            );
         } catch (error) {
             console.error("[Gallery Thumbnail images loading] Error:", error);
             return [];
         }
     }
+
+    private async getGalleryImages() {
+        try {
+            const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
+            console.log("[Gallery common images loading] response:", response);
+
+            const data = await response.json();
+            console.log("[Gallery common images loading] data:", data);
+
+            return data.resources.sort((a: any, b: any) => compare(a, b));
+        } catch (error) {
+            console.error("[Gallery common images loading] Error:", error);
+            return [];
+        }
+    }
+
+    /** EVENTS **/
 
     public async getEvents(): Promise<EventData[]> {
         try {
@@ -57,3 +68,20 @@ class MyRepository {
 }
 
 export default new MyRepository();
+
+function compare(a: any, b: any): number {
+    try {
+        return getFirstNumberInString(a.public_id) - getFirstNumberInString(b.public_id);
+    } catch (error) {
+        return a.created_at - b.created_at;
+    }
+}
+
+function getFirstNumberInString(str: string): number {
+    const match = str.match(/\d+/);
+    if (match) {
+        const numberPart = match[0];
+        console.log("Number part:", numberPart);
+        return parseInt(numberPart) || 1000000;
+    }
+}
