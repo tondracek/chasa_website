@@ -63,7 +63,6 @@ function onPosterHide() {
 
 .events-container {
   display: flex;
-  margin-top: 3rem;
   gap: 1rem;
   flex-direction: column;
   justify-content: space-evenly;
@@ -81,6 +80,12 @@ function onPosterHide() {
 }
 
 @media (max-width: 600px) {
+
+  .container {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+
   .events-container-without-poster {
     margin-top: 0;
     flex-direction: column;
