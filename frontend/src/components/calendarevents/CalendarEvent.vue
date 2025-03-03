@@ -22,6 +22,7 @@ defineProps({
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
   min-width: 150px;
 }
 

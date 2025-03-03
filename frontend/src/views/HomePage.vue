@@ -8,7 +8,7 @@
 
     <div class="highlighted-row">
       <h2>{{ strings.upcoming_events() }}</h2>
-      <CalendarEventsRow/>
+      <CalendarEventsSection/>
     </div>
 
     <div class="horizontal-center">
@@ -45,9 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import {onMounted, ref} from "vue";
 import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
-import CalendarEventsRow from "@/components/calendarevents/CalendarEventsRow.vue";
+import CalendarEventsSection from "@/components/calendarevents/CalendarEventsRow.vue";
 import CollapsiblePhotoGallery from "@/components/photogallery/CollapsiblePhotoGallery.vue";
 import MyRepository from "@/data/MyRepository";
 import * as strings from "@/paraglide/messages.js";
@@ -100,6 +100,7 @@ onMounted(async () => {
 h2 {
   color: #373127;
   font-size: 2rem;
+  margin-top: 0;
   margin-bottom: 1rem;
   font-weight: bold;
 }

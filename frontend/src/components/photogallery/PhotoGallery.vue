@@ -53,4 +53,16 @@ img {
   margin: 10px;
   cursor: pointer;
 }
+
+@media (max-width: 550px) {
+  img {
+    height: 100px;
+  }
+}
+
+@media (max-width: 410px) {
+  img {
+    height: 80px;
+  }
+}
 </style>
