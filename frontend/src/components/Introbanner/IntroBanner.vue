@@ -97,7 +97,7 @@ function getBannerHeight() {
   }
 
   .additional-info-button {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     color: #2c2c2c;
   }
 }
