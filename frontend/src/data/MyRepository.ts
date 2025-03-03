@@ -1,18 +1,20 @@
 import yaml from 'js-yaml';
 
 class MyRepository {
+
     public async getGalleryImagesUrls(): Promise<string[]> {
         try {
             const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
-            console.log("Response:", response);
 
             const data = await response.json();
+
+            console.log("[Gallery full-quality images loading] data:", data);
 
             return data.resources.map((resource: any) => {
                 return `https://res.cloudinary.com/des4ugdwx/image/upload/v${resource.version}/${resource.public_id}.${resource.format}`;
             });
         } catch (error) {
-            console.error("Error fetching image URLs:", error);
+            console.error("[Gallery full-quality images loading] Error:", error);
             return [];
         }
     }
@@ -20,15 +22,16 @@ class MyRepository {
     public async getGalleryThumbnailImagesUrls(): Promise<string[]> {
         try {
             const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
-            console.log("Response:", response);
 
             const data = await response.json();
+
+            console.log("[Gallery Thumbnail images loading] data:", data);
 
             return data.resources.map((resource: any) => {
                 return `https://res.cloudinary.com/des4ugdwx/image/upload/w_300/v${resource.version}/${resource.public_id}.${resource.format}`;
             });
         } catch (error) {
-            console.error("Error fetching image URLs:", error);
+            console.error("[Gallery Thumbnail images loading] Error:", error);
             return [];
         }
     }
