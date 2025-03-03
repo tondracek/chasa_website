@@ -32,11 +32,11 @@
     <div class="highlighted-row">
       <footer>
         <a href="https://www.instagram.com/mohelenska_chasa/" target="_blank" rel="noopener noreferrer">
-          <img src="/brand-instagram.png" alt="Instagram" class="social-icon" />
+          <img :src="instagramIcon" alt="Instagram" class="social-icon"/>
           <span>Instagram</span>
         </a>
         <a href="https://www.facebook.com/MohelenskaChasa" target="_blank" rel="noopener noreferrer">
-          <img src="/brand-facebook.png" alt="Facebook" class="social-icon" />
+          <img :src="facebookIcon" alt="Facebook" class="social-icon"/>
           <span>Facebook</span>
         </a>
       </footer>
@@ -55,6 +55,9 @@ import * as strings from "@/paraglide/messages.js";
 
 const photos = ref<string[]>([]);
 const thumbnailPhotos = ref<string[]>([]);
+
+const instagramIcon = ref<string>("brand-instagram.png")
+const facebookIcon = ref<string>("brand-facebook.png")
 
 onMounted(async () => {
   photos.value = await MyRepository.getGalleryImagesUrls();
