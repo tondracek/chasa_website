@@ -25,69 +25,43 @@
       </div>
     </div>
 
-    <footer>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-      <p>...</p>
-    </footer>
+    <div class="horizontal-center">
+      <div class="divider"/>
+    </div>
+
+    <div class="highlighted-row">
+      <footer>
+        <a href="https://www.instagram.com/mohelenska_chasa/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram social-icon"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/MohelenskaChasa" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook social-icon"></i>
+          <span>Facebook</span>
+        </a>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import IntroBanner from "@/components/Introbanner/IntroBanner.vue";
 import CalendarEventsRow from "@/components/calendarevents/CalendarEventsRow.vue";
 import CollapsiblePhotoGallery from "@/components/photogallery/CollapsiblePhotoGallery.vue";
 import MyRepository from "@/data/MyRepository";
 import * as strings from "@/paraglide/messages.js";
 
-const showBanner = ref(true);
-
 const photos = ref<string[]>([]);
 const thumbnailPhotos = ref<string[]>([]);
 
-const handleScroll = () => {
-  if (window.scrollY > 50) {
-    showBanner.value = false;
-  }
-};
-
 onMounted(async () => {
-  window.addEventListener("scroll", handleScroll, {passive: true});
-
   photos.value = await MyRepository.getGalleryImagesUrls();
   thumbnailPhotos.value = await MyRepository.getGalleryThumbnailImagesUrls();
 });
-
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
-
 </script>
 
 <style scoped>
-
 .home-page {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -122,6 +96,7 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 
+/* Ensures headings have consistent styling */
 h2 {
   color: #373127;
   font-size: 2rem;
@@ -129,4 +104,33 @@ h2 {
   font-weight: bold;
 }
 
+/* Footer takes full width and distributes its content */
+footer {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+/* Styling for each link inside the footer */
+footer a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #373127;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #555;
+}
+
+/* Icon styling */
+.social-icon {
+  font-size: 24px;
+}
 </style>
