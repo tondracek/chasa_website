@@ -5,9 +5,9 @@ class MyRepository {
     public async getGalleryImagesUrls(): Promise<string[]> {
         try {
             const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
+            console.log("[Gallery full-quality images loading] response:", response);
 
             const data = await response.json();
-
             console.log("[Gallery full-quality images loading] data:", data);
 
             return data.resources.map((resource: any) => {
@@ -22,9 +22,9 @@ class MyRepository {
     public async getGalleryThumbnailImagesUrls(): Promise<string[]> {
         try {
             const response = await fetch("https://res.cloudinary.com/des4ugdwx/image/list/galerie.json");
+            console.log("[Gallery Thumbnail images loading] response:", response)
 
             const data = await response.json();
-
             console.log("[Gallery Thumbnail images loading] data:", data);
 
             return data.resources.map((resource: any) => {
